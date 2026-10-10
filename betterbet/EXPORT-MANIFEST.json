@@ -1,0 +1,656 @@
+{
+  "schema": "betterbet-portable-source-export-v1",
+  "product": "BETTERBET. — The Product Decision Lab",
+  "project_version": "1.0.0",
+  "export_date": "2026-10-10T03:32:59.989200+00:00",
+  "archive_name": "betterbet-complete-portable-source.zip",
+  "archive_root": "betterbet/",
+  "source_identification": {
+    "kind": "existing Sites source repository, current checked HEAD",
+    "project_id": "appgprj_6ac8a06fe61081919354c444eddde2a5",
+    "version_id": "appgprj_6ac8a06fe61081919354c444eddde2a5~appgver_418398ab55288191a1dcd2a328a1664b",
+    "saved_version_number": 1,
+    "commit_sha": "09f0ea0dd7479cf0f114ff27478ba426907de460",
+    "matches_current_saved_version": true,
+    "uncommitted_source_changes": false,
+    "source_synchronized_read_only": true
+  },
+  "framework": {
+    "frontend": "React",
+    "react_version": "19.1.1",
+    "react_dom_version": "19.1.1",
+    "build_tool": "Vite",
+    "vite_version": "6.1.0",
+    "source_languages": [
+      "JavaScript",
+      "JSX",
+      "CSS"
+    ],
+    "typescript": false,
+    "ssr_runtime": false,
+    "backend": null
+  },
+  "node": {
+    "selected_major": "24.x",
+    "validated_version": "24.19.0",
+    "pnpm_engine_requirement": ">=22.13"
+  },
+  "package_manager": {
+    "name": "pnpm",
+    "version": "11.25.0",
+    "lockfile": "pnpm-lock.yaml",
+    "lockfile_format": "9.0",
+    "lockfile_sha256": "132bdb9d36da714c62bb5847692bb473b09459ec99621ebef33653d757e587aa",
+    "preserved_original_lockfile": true
+  },
+  "source_entry_point": "src/main.jsx",
+  "html_entry_point": "index.html",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build && node scripts/postbuild.mjs",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "install_command": "npx --yes pnpm@11.25.0 install --frozen-lockfile",
+  "build_command": "npx --yes pnpm@11.25.0 run build",
+  "output_directory": "dist",
+  "routes": [
+    "/",
+    "/product",
+    "/method",
+    "/case-study",
+    "/about",
+    "/lab",
+    "/lab/overview",
+    "/lab/diagnose",
+    "/lab/evidence",
+    "/lab/decide",
+    "/lab/experiment",
+    "/lab/deliver",
+    "/lab/review",
+    "/lab/decisions",
+    "/lab/data",
+    "/lab/settings"
+  ],
+  "assets_summary": {
+    "font_files": [
+      "public/fonts/font-0.ttf",
+      "public/fonts/font-1.ttf",
+      "public/fonts/font-2.ttf",
+      "public/fonts/font-3.ttf",
+      "public/fonts/font-4.ttf",
+      "public/fonts/font-5.ttf",
+      "public/fonts/font-6.ttf",
+      "public/fonts/font-7.ttf"
+    ],
+    "fonts": [
+      "Inter",
+      "Space Grotesk"
+    ],
+    "font_licenses": [
+      "public/fonts/inter-OFL.txt",
+      "public/fonts/spacegrotesk-OFL.txt"
+    ],
+    "font_stylesheet": "public/fonts.css",
+    "favicon": "public/favicon.svg",
+    "og_assets": [
+      "public/og-image.svg",
+      "public/og-image.png"
+    ],
+    "og_png_dimensions": [
+      1200,
+      630
+    ],
+    "procedural_3d_source": "src/components/field-scene.mjs",
+    "svg_fallback_source": "src/components/DecisionField.jsx",
+    "external_3d_models": [],
+    "remote_asset_dependencies": []
+  },
+  "translation_resources": {
+    "languages": [
+      "en",
+      "vi"
+    ],
+    "files": [
+      "src/main.jsx",
+      "src/Marketing.jsx",
+      "src/Lab.jsx",
+      "src/DataManager.jsx",
+      "src/components/ui.jsx",
+      "src/domain/content.mjs"
+    ],
+    "mechanism": "Inline EN/VI strings and paired arrays via context t/c helpers; Intl formatting",
+    "user_authored_text": "Preserved original language",
+    "full_content_audit": "unverified",
+    "known_exception": "Existing error-boundary fallback is English-only."
+  },
+  "demo_generator": {
+    "location": "src/domain/analytics.mjs",
+    "function": "generateDemo",
+    "provenance": "synthetic_demo",
+    "computed_default_unique_users": [
+      12000,
+      10080,
+      3720,
+      2160
+    ],
+    "computed_invite_loss_users": 6360,
+    "computed_invite_loss_rate": 0.6309523809523809,
+    "conversion_window_days": 7,
+    "included_personal_data": false
+  },
+  "analytics_engine": {
+    "location": "src/domain/analytics.mjs",
+    "function": "computeOrderedFunnel",
+    "semantics": "Ordered chronological distinct-user funnel; cohort/entry-property filters and elapsed conversion window"
+  },
+  "import_export_pipeline": {
+    "ui": "src/DataManager.jsx",
+    "csv_engine": "src/domain/analytics.mjs",
+    "markdown_exporter": "src/domain/content.mjs:decisionMarkdown",
+    "backup_actions": "src/main.jsx",
+    "download_helper": "src/domain/storage.mjs"
+  },
+  "persistence": {
+    "scope": "browser origin-local; no backend/cloud synchronization",
+    "local_storage_key": "betterbet.workspace.v1",
+    "indexeddb_database": "betterbet-local",
+    "indexeddb_store": "datasets",
+    "backup_schema": "betterbet-backup-v1",
+    "existing_user_data_in_zip": false,
+    "cross_origin_automatic_migration": false,
+    "migration": "Explicit Settings Export Workspace then Restore Backup on the assigned new origin"
+  },
+  "tests_present": [
+    "tests/analytics.test.mjs",
+    "tests/render.test.mjs",
+    "tests/render-fixture.jsx"
+  ],
+  "validation": {
+    "clean_install": {
+      "status": "pass",
+      "exit_code": 0,
+      "downloaded_packages": 18
+    },
+    "production_build": {
+      "status": "pass",
+      "exit_code": 0,
+      "transformed_modules": 1591,
+      "reported_duration": "2m 57s"
+    },
+    "tests": {
+      "status": "pass",
+      "exit_code": 0,
+      "total": 54,
+      "passed": 54,
+      "failed": 0,
+      "skipped": 0,
+      "domain_tests": 16,
+      "render_tests": 38
+    },
+    "audit": {
+      "status": "warn",
+      "exit_code": 1,
+      "advisories": 13,
+      "severity": {
+        "high": 2,
+        "moderate": 9,
+        "low": 2,
+        "critical": 0
+      },
+      "report": "DEPENDENCY-AUDIT.json"
+    },
+    "static_packaging_checks": {
+      "route_entry_points": 16,
+      "html_resources_resolved": 5,
+      "font_resources_resolved": 8,
+      "default_seo_origin_omitted": true,
+      "configured_seo_origin_routes": 16,
+      "configured_public_sitemap_routes": 5,
+      "invalid_origin_rejected": true,
+      "vercel_configuration_inspected": true
+    },
+    "ssr_link_scan": {
+      "pages": 32,
+      "internal_links": 628,
+      "unknown_targets": 0
+    },
+    "browser_qa": "not_run",
+    "vercel_deployment": "not_run",
+    "github_push": "not_run"
+  },
+  "sites_dependencies_removed_replaced": [
+    {
+      "path": ".openai/hosting.json",
+      "action": "omitted",
+      "reason": "Native Site identity/hosting configuration is not needed by the standalone build."
+    },
+    {
+      "path": ".env.example",
+      "action": "omitted",
+      "reason": "No environment variables are required; previous file contained only explanatory comments."
+    },
+    {
+      "path": ".gitignore",
+      "action": "updated",
+      "reason": "Ignore local build/cache/deployment state, credentials and archive outputs."
+    },
+    {
+      "path": ".nvmrc",
+      "action": "added",
+      "reason": "Select the validated Node 24 major."
+    },
+    {
+      "path": "package.json",
+      "action": "updated",
+      "reason": "Add engines.node = 24.x; preserve dependency versions, packageManager and scripts."
+    },
+    {
+      "path": "index.html",
+      "action": "updated",
+      "reason": "Remove old Site absolute canonical/OG URLs; use bundled relative OG image."
+    },
+    {
+      "path": "public/robots.txt",
+      "action": "updated",
+      "reason": "Remove old Site sitemap origin."
+    },
+    {
+      "path": "public/sitemap.xml",
+      "action": "omitted",
+      "reason": "Old-origin sitemap replaced by optional actual-origin build generation."
+    },
+    {
+      "path": "site.config.json",
+      "action": "added",
+      "reason": "Public siteUrl defaults to null; no invented or claimed Vercel domain."
+    },
+    {
+      "path": "scripts/postbuild.mjs",
+      "action": "updated",
+      "reason": "Preserve all route entry points; generate optional canonical/OG/sitemap metadata for actual configured origin."
+    },
+    {
+      "path": "tests/render.test.mjs",
+      "action": "updated",
+      "reason": "Only change temporary render-fixture cache from .sites-runtime to .cache/betterbet-tests."
+    },
+    {
+      "path": "vercel.json",
+      "action": "updated",
+      "reason": "Add Vite/output/exact pnpm install/build settings; retain scoped route rewrites."
+    },
+    {
+      "path": "README.md",
+      "action": "updated",
+      "reason": "Portable run commands, actual architecture, local migration and limits."
+    },
+    {
+      "path": "DEPLOYMENT.md",
+      "action": "added",
+      "reason": "Manual independent repository/project workflow and exact root-directory layouts."
+    },
+    {
+      "path": "VALIDATION.md",
+      "action": "added",
+      "reason": "Executed checks and explicit unverified items."
+    },
+    {
+      "path": "DEPENDENCY-AUDIT.json",
+      "action": "added",
+      "reason": "Actual unresolved audit findings from preserved lockfile."
+    }
+  ],
+  "application_source_preservation": {
+    "all_src_files_unchanged": true,
+    "src_file_count": 11,
+    "unchanged_source_sha256": {
+      "src/DataManager.jsx": "64a4a33bb03da2f772c367827dc25419d9b86a1e2819b8f762c397b049c76f43",
+      "src/Lab.jsx": "6374052199c98439299d8f13ccf0716d488da34013f8ba4c6253944f337db98f",
+      "src/Marketing.jsx": "83c59a7a6a2fcdaaf4c40aca321cfa08868c9a0bc2d368fbc48b90df4b4a33b0",
+      "src/components/DecisionField.jsx": "523dec3955cf5fb2d91cd9dc9c7f1ba652931896cad381d6d4e32611d9fae956",
+      "src/components/field-scene.mjs": "2e1ade0765882fcec1cbae48f19b2fdff9c7ae53046a0603a4b977a2db7cc6f4",
+      "src/components/ui.jsx": "ace6e711c589778bf4ff73d7d71813d2a81fc011ab54e5953ce7548a9239a688",
+      "src/domain/analytics.mjs": "06dc16725ed6490ebba14e9d968f0290fe86f558f0fa06eb4da1117d7d640c58",
+      "src/domain/content.mjs": "a7d3901c9686ecd65ea2261f17fcc3f553e424a85db56c46cca1eae17b406b5f",
+      "src/domain/storage.mjs": "50dadd8335ae0bb1652db8348c7c3049fa8127ec6dbddfb90791ea2f02fbe091",
+      "src/main.jsx": "8f3727eeed7e73cda51626e3355aa2971c0a04ee4a8fc107e4432b07799fbc4e",
+      "src/styles.css": "42854a250b2b122a295fb00b220809f25aa3ba8e65ea0d1a9ea2d699efe41261"
+    }
+  },
+  "environment_variables": {
+    "required": [],
+    "optional": []
+  },
+  "public_origin_configuration": {
+    "file": "site.config.json",
+    "field": "siteUrl",
+    "current_value": null,
+    "meaning": "Configure only after actual production origin is assigned; default build omits absolute SEO URL/sitemap metadata."
+  },
+  "proposed_manual_destinations": {
+    "github_account": "jvinh209product",
+    "github_repository": "betterbet",
+    "initial_branch": "main",
+    "vercel_project": "betterbet",
+    "desired_hostname": "betterbet.vercel.app",
+    "hostname_availability": "unverified",
+    "accounts_accessed_or_modified": false
+  },
+  "deployment_settings": {
+    "framework": "Vite",
+    "node": "24.x",
+    "recommended_root_directory": "./",
+    "alternative_root_directory": "betterbet",
+    "output": "dist",
+    "configuration": "vercel.json",
+    "required_environment_variables": []
+  },
+  "known_limitations": [
+    "13 unresolved dependency advisories in preserved Vite/esbuild versions, including 2 high severity; dependency remediation not part of faithful source export.",
+    "Real-browser responsive/keyboard/WebGL/reduced-motion/file-download/persistence/backup/restore and full workflow QA not run.",
+    "Vercel-hosted install/build/deep-link refresh and domain assignment unverified; no deployment performed.",
+    "Full translation audit unverified; existing error-boundary fallback is English-only.",
+    "Source ZIP contains no existing visitor localStorage/IndexedDB data; manual backup/restore is necessary between origins.",
+    "Absolute canonical/OG URL and sitemap metadata omitted until actual siteUrl is configured.",
+    "Local-only workspace with one active imported event dataset; no backend, cloud sync, team permissions or automated experiment execution.",
+    "Imported binary outcomes do not establish randomization validity and do not measure planner guardrails; sample planning and simulation are assumptions."
+  ],
+  "file_inventory_policy": "Includes all archive files except EXPORT-MANIFEST.json, whose recursive self-hash is intentionally excluded.",
+  "files": [
+    {
+      "path": ".gitignore",
+      "size_bytes": 103,
+      "sha256": "16e212a687b837153f1470c9140d47659ecc0fb6a063e2a2a7ba29b85fcc87dd",
+      "original_sha256": "e145116f3e9392e444e4901ee0397bfba9f30c3d9c2ef89cc2a9eae4e37ccba7",
+      "unchanged_from_source": false
+    },
+    {
+      "path": ".nvmrc",
+      "size_bytes": 3,
+      "sha256": "68ca3fba3b7e864770cb61aeb306d4bd4354b68ab4dd38450860c5d823e42a53",
+      "original_sha256": null,
+      "unchanged_from_source": null
+    },
+    {
+      "path": "DEPENDENCY-AUDIT.json",
+      "size_bytes": 4296,
+      "sha256": "b245caf86ad5bb501a300bf55fc2f0474a10a0715081e47bfb5b1ceb56adbd72",
+      "original_sha256": null,
+      "unchanged_from_source": null
+    },
+    {
+      "path": "DEPLOYMENT.md",
+      "size_bytes": 7574,
+      "sha256": "7e789c17d903cc2532953a7e291dbba56654e289ea5c935f4e6556e646df32e1",
+      "original_sha256": null,
+      "unchanged_from_source": null
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 10122,
+      "sha256": "e4bc54e810c6ecb8feb42ab53f655f7e8333f868d74bca2432c81c49405bd46e",
+      "original_sha256": "58635da39e34a3d3419c226479783beea510870ddec4297ef7d7c30c33d04082",
+      "unchanged_from_source": false
+    },
+    {
+      "path": "VALIDATION.md",
+      "size_bytes": 10391,
+      "sha256": "bd648f3977be1a59f4da89a175ff5a8a0ce370965e788c17e240a502b74bf89e",
+      "original_sha256": null,
+      "unchanged_from_source": null
+    },
+    {
+      "path": "index.html",
+      "size_bytes": 960,
+      "sha256": "7dd1fa668ae03551c4004c285a9d9330c33683150437d0a7dc55b2fb6ea4e0ee",
+      "original_sha256": "f2ed45ba2aee75a5d248477ad928745464e0c50646156223b5e28259521f1e43",
+      "unchanged_from_source": false
+    },
+    {
+      "path": "package.json",
+      "size_bytes": 597,
+      "sha256": "22cf5497aeca9a0733e7427eb9ff33161ec0bfef219efac600c2a2eef973e2b0",
+      "original_sha256": "824b0e45d2b65a50d3d347fbaa6df0fa51b274439ebf29df65721ff5b0d3bba3",
+      "unchanged_from_source": false
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "size_bytes": 21520,
+      "sha256": "132bdb9d36da714c62bb5847692bb473b09459ec99621ebef33653d757e587aa",
+      "original_sha256": "132bdb9d36da714c62bb5847692bb473b09459ec99621ebef33653d757e587aa",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "pnpm-workspace.yaml",
+      "size_bytes": 29,
+      "sha256": "ac02d96368617c760f093cfe61fdec64b6244007ab3553e0d6621f706f54a353",
+      "original_sha256": "ac02d96368617c760f093cfe61fdec64b6244007ab3553e0d6621f706f54a353",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "public/favicon.svg",
+      "size_bytes": 285,
+      "sha256": "deeed1e3ec7354995728386a445735ba338da4c5afd9f6939bbec8f75eb2c579",
+      "original_sha256": "deeed1e3ec7354995728386a445735ba338da4c5afd9f6939bbec8f75eb2c579",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "public/fonts/font-0.ttf",
+      "size_bytes": 324820,
+      "sha256": "1b08e7fc267a5c7e1d614100f604b83e7e8a0be241f0f288faa2b3ac93a683ba",
+      "original_sha256": "1b08e7fc267a5c7e1d614100f604b83e7e8a0be241f0f288faa2b3ac93a683ba",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "public/fonts/font-1.ttf",
+      "size_bytes": 325304,
+      "sha256": "8c883f63b2c4157d997319f2c8bc6995ed4357ef371940d31ca159004a4aae63",
+      "original_sha256": "8c883f63b2c4157d997319f2c8bc6995ed4357ef371940d31ca159004a4aae63",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "public/fonts/font-2.ttf",
+      "size_bytes": 326048,
+      "sha256": "e7a1aaf7eda9f2fad4131725fa556265ec75ca7b2d756260173a040363e8d4f7",
+      "original_sha256": "e7a1aaf7eda9f2fad4131725fa556265ec75ca7b2d756260173a040363e8d4f7",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "public/fonts/font-3.ttf",
+      "size_bytes": 326468,
+      "sha256": "b37284b5701b6b168dfc770aa1a4ac492106422fd3ba76bc7641e37434e8019c",
+      "original_sha256": "b37284b5701b6b168dfc770aa1a4ac492106422fd3ba76bc7641e37434e8019c",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "public/fonts/font-4.ttf",
+      "size_bytes": 69360,
+      "sha256": "ec926d5065eaca49a48f96e312bbae0bbc5733c24215cf5dfabbdccee926fef7",
+      "original_sha256": "ec926d5065eaca49a48f96e312bbae0bbc5733c24215cf5dfabbdccee926fef7",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "public/fonts/font-5.ttf",
+      "size_bytes": 69416,
+      "sha256": "3e699ead1876244fa392243054ddefe7cf631b488438828a8a100731a22ab995",
+      "original_sha256": "3e699ead1876244fa392243054ddefe7cf631b488438828a8a100731a22ab995",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "public/fonts/font-6.ttf",
+      "size_bytes": 69356,
+      "sha256": "6c0346b8d297ebdc225832833e03e884a26ad99d265ecd3924d46e1ba285ea87",
+      "original_sha256": "6c0346b8d297ebdc225832833e03e884a26ad99d265ecd3924d46e1ba285ea87",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "public/fonts/font-7.ttf",
+      "size_bytes": 69308,
+      "sha256": "3e756954468ff1cb302dae0414262e72f76a67d87bef3fa1f3226cd0fb9b2d85",
+      "original_sha256": "3e756954468ff1cb302dae0414262e72f76a67d87bef3fa1f3226cd0fb9b2d85",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "public/fonts/inter-OFL.txt",
+      "size_bytes": 4377,
+      "sha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57",
+      "original_sha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "public/fonts/spacegrotesk-OFL.txt",
+      "size_bytes": 4495,
+      "sha256": "564ce565c371c5e5bbf286006565a7c9aa55a9f56e7ca58d56e05d649dd61a72",
+      "original_sha256": "564ce565c371c5e5bbf286006565a7c9aa55a9f56e7ca58d56e05d649dd61a72",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "public/fonts.css",
+      "size_bytes": 1256,
+      "sha256": "1e7422d95ff55516b479c7b4cbb17fc3cf85dba7f0f65f0ead7a53e854329287",
+      "original_sha256": "1e7422d95ff55516b479c7b4cbb17fc3cf85dba7f0f65f0ead7a53e854329287",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "public/og-image.png",
+      "size_bytes": 78597,
+      "sha256": "4e1e9b2a618cc8c873631b580b36e0cac7b074572fe482151accbe7d4aa2c7c9",
+      "original_sha256": "4e1e9b2a618cc8c873631b580b36e0cac7b074572fe482151accbe7d4aa2c7c9",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "public/og-image.svg",
+      "size_bytes": 2030,
+      "sha256": "f6feef8a634fa8c6c7417c692386d649490465da65d51d3cd3f3a7fcea8592b5",
+      "original_sha256": "f6feef8a634fa8c6c7417c692386d649490465da65d51d3cd3f3a7fcea8592b5",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "public/robots.txt",
+      "size_bytes": 38,
+      "sha256": "36f5525bbe237d0155774b503e0d4612dc5e306644d1b2b5c4072c3eb3ac9bea",
+      "original_sha256": "f3997392db30151389b39d562ff730f8ef6f27d0d9f0f3eba21f5f9f786da129",
+      "unchanged_from_source": false
+    },
+    {
+      "path": "scripts/postbuild.mjs",
+      "size_bytes": 2082,
+      "sha256": "880a9ebbc12ee53c0d81e492c897a8b7720dcdee1d6c09c465f2401c1801c0fe",
+      "original_sha256": "4c4bf2ce6e2418e0b41c232f30cd49e0eda85ec2235ada915f6712b944e10e0c",
+      "unchanged_from_source": false
+    },
+    {
+      "path": "site.config.json",
+      "size_bytes": 22,
+      "sha256": "97cbc613ed7a66e6794c56ed1456490c7661412536bc691ea21606be0af1f7ab",
+      "original_sha256": null,
+      "unchanged_from_source": null
+    },
+    {
+      "path": "src/DataManager.jsx",
+      "size_bytes": 21725,
+      "sha256": "64a4a33bb03da2f772c367827dc25419d9b86a1e2819b8f762c397b049c76f43",
+      "original_sha256": "64a4a33bb03da2f772c367827dc25419d9b86a1e2819b8f762c397b049c76f43",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "src/Lab.jsx",
+      "size_bytes": 85708,
+      "sha256": "6374052199c98439299d8f13ccf0716d488da34013f8ba4c6253944f337db98f",
+      "original_sha256": "6374052199c98439299d8f13ccf0716d488da34013f8ba4c6253944f337db98f",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "src/Marketing.jsx",
+      "size_bytes": 32484,
+      "sha256": "83c59a7a6a2fcdaaf4c40aca321cfa08868c9a0bc2d368fbc48b90df4b4a33b0",
+      "original_sha256": "83c59a7a6a2fcdaaf4c40aca321cfa08868c9a0bc2d368fbc48b90df4b4a33b0",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "src/components/DecisionField.jsx",
+      "size_bytes": 2700,
+      "sha256": "523dec3955cf5fb2d91cd9dc9c7f1ba652931896cad381d6d4e32611d9fae956",
+      "original_sha256": "523dec3955cf5fb2d91cd9dc9c7f1ba652931896cad381d6d4e32611d9fae956",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "src/components/field-scene.mjs",
+      "size_bytes": 4029,
+      "sha256": "2e1ade0765882fcec1cbae48f19b2fdff9c7ae53046a0603a4b977a2db7cc6f4",
+      "original_sha256": "2e1ade0765882fcec1cbae48f19b2fdff9c7ae53046a0603a4b977a2db7cc6f4",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "src/components/ui.jsx",
+      "size_bytes": 6039,
+      "sha256": "ace6e711c589778bf4ff73d7d71813d2a81fc011ab54e5953ce7548a9239a688",
+      "original_sha256": "ace6e711c589778bf4ff73d7d71813d2a81fc011ab54e5953ce7548a9239a688",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "src/domain/analytics.mjs",
+      "size_bytes": 10027,
+      "sha256": "06dc16725ed6490ebba14e9d968f0290fe86f558f0fa06eb4da1117d7d640c58",
+      "original_sha256": "06dc16725ed6490ebba14e9d968f0290fe86f558f0fa06eb4da1117d7d640c58",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "src/domain/content.mjs",
+      "size_bytes": 10994,
+      "sha256": "a7d3901c9686ecd65ea2261f17fcc3f553e424a85db56c46cca1eae17b406b5f",
+      "original_sha256": "a7d3901c9686ecd65ea2261f17fcc3f553e424a85db56c46cca1eae17b406b5f",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "src/domain/storage.mjs",
+      "size_bytes": 1655,
+      "sha256": "50dadd8335ae0bb1652db8348c7c3049fa8127ec6dbddfb90791ea2f02fbe091",
+      "original_sha256": "50dadd8335ae0bb1652db8348c7c3049fa8127ec6dbddfb90791ea2f02fbe091",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "src/main.jsx",
+      "size_bytes": 9770,
+      "sha256": "8f3727eeed7e73cda51626e3355aa2971c0a04ee4a8fc107e4432b07799fbc4e",
+      "original_sha256": "8f3727eeed7e73cda51626e3355aa2971c0a04ee4a8fc107e4432b07799fbc4e",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "src/styles.css",
+      "size_bytes": 87351,
+      "sha256": "42854a250b2b122a295fb00b220809f25aa3ba8e65ea0d1a9ea2d699efe41261",
+      "original_sha256": "42854a250b2b122a295fb00b220809f25aa3ba8e65ea0d1a9ea2d699efe41261",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "tests/analytics.test.mjs",
+      "size_bytes": 8925,
+      "sha256": "66a4fd717475422fcdb47288130c4e94adecad36e6eeee53f1c803d651e6c364",
+      "original_sha256": "66a4fd717475422fcdb47288130c4e94adecad36e6eeee53f1c803d651e6c364",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "tests/render-fixture.jsx",
+      "size_bytes": 2550,
+      "sha256": "15e19d5bf37681596871bdfea391b116be6df925761f1cf5624ec78ad52c3c98",
+      "original_sha256": "15e19d5bf37681596871bdfea391b116be6df925761f1cf5624ec78ad52c3c98",
+      "unchanged_from_source": true
+    },
+    {
+      "path": "tests/render.test.mjs",
+      "size_bytes": 1408,
+      "sha256": "dd07a8e24cee853efc6f8d41499d6598896b80702854ede7dc49eda34de19c53",
+      "original_sha256": "9a1f91930470d959d71f0d8c55ee72a890e0d44d63f15293eb45c79c005db303",
+      "unchanged_from_source": false
+    },
+    {
+      "path": "vercel.json",
+      "size_bytes": 584,
+      "sha256": "3cba9e0a74d89255d1fcda174fc81068b092cbf3f8ad39b2b6c9ad6f48012017",
+      "original_sha256": "b58a06370744c68e17f4d9a09e61d5d59cc3732771e05ab2d1d28bcb4d46e291",
+      "unchanged_from_source": false
+    }
+  ]
+}

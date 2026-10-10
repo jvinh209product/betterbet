@@ -1,0 +1,8 @@
+const KEY='betterbet.workspace.v1';
+export function readLocal(){try{return JSON.parse(localStorage.getItem(KEY)||'null');}catch{return null;}}
+export function saveLocal(state){try{localStorage.setItem(KEY,JSON.stringify(state));return true;}catch{return false;}}
+function database(){return new Promise((resolve,reject)=>{const request=indexedDB.open('betterbet-local',1);request.onupgradeneeded=()=>request.result.createObjectStore('datasets');request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error);});}
+export async function storeData(key,value){const db=await database();return new Promise((resolve,reject)=>{const tx=db.transaction('datasets','readwrite');tx.objectStore('datasets').put(value,key);tx.oncomplete=()=>{db.close();resolve();};tx.onerror=()=>{db.close();reject(tx.error);};});}
+export async function getData(key){const db=await database();return new Promise((resolve,reject)=>{const tx=db.transaction('datasets','readonly');const req=tx.objectStore('datasets').get(key);req.onsuccess=()=>{resolve(req.result);db.close();};req.onerror=()=>{reject(req.error);db.close();};});}
+export async function clearData(){const db=await database();return new Promise((resolve,reject)=>{const tx=db.transaction('datasets','readwrite');tx.objectStore('datasets').clear();tx.oncomplete=()=>{db.close();resolve();};tx.onerror=()=>reject(tx.error);});}
+export function download(name,content,type='text/plain'){const url=URL.createObjectURL(new Blob([content],{type}));const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}

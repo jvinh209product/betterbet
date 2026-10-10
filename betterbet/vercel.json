@@ -1,0 +1,28 @@
+{
+  "framework": "vite",
+  "installCommand": "npx --yes pnpm@11.25.0 install --frozen-lockfile",
+  "buildCommand": "npx --yes pnpm@11.25.0 run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/lab/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/product",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/method",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/case-study",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/index.html"
+    }
+  ]
+}
