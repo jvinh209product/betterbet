@@ -1,0 +1,4 @@
+﻿feedback_id,entity_id,source_type,source_date,feedback_text,segment,stance,tags,synthetic
+f_001,u_demo_001,interview,2026-09-03T14:00:00Z,I wanted to see the dashboard before inviting my team.,trial,support,onboarding;invites,true
+f_002,u_demo_002,support,2026-09-04T09:00:00Z,"The invite form timed out on mobile, twice.",mobile,alternative,mobile;bugs,true
+f_003,u_demo_003,interview,2026-09-04T10:30:00Z,Inviting colleagues was exactly why I signed up.,trial,counter,team;value,true

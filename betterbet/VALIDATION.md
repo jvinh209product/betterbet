@@ -1,103 +1,76 @@
-# BETTERBET export validation
+# VALIDATION
 
-Validation date: **2026-10-10 UTC**. These results apply to the portable copy, not an assumed Vercel deployment. They distinguish executed checks from implemented-but-unverified behavior.
+## Revision and environment
 
-## Provenance and scope
+Exported saved **published version 2**, package `1.1.0`, source commit `260cc23d4c78834081e1a3b8f9088f5b88170b12`. Checked 2026-10-12 (Asia/Saigon). Node **v24.19.0**; pnpm **11.25.0**; React **19.1.1**; Vite **6.1.0**. The application code, tests, lockfile, original visual assets/fonts/licenses and supplied CSV bytes match the committed snapshot. There are no unsaved source edits in the original checkout.
 
-The native source-opening workflow checked the current repository HEAD. It matches saved Site version **1**, commit **09f0ea0dd7479cf0f114ff27478ba426907de460**. The source checkout had no uncommitted tracked changes. All **11 files under `src/`** and the exact `pnpm-lock.yaml` were verified SHA-256 identical to that source. The existing Site was not edited, saved, published or redeployed; GitHub/Vercel account operations were not performed.
+The verification below was one focused export pass. Dependencies were not upgraded. No Site or external repository was changed, committed, pushed or deployed.
 
-Portability changes are confined to Node/build/deployment configuration, origin-specific SEO metadata, a test-cache directory name and documentation. `EXPORT-MANIFEST.json` lists changes and hashes. The ZIP excludes `.git`, `.openai`, `node_modules`, `dist`, test caches, secrets and visitor data.
+## Actual commands and outcomes
 
-## Executed commands
-
-Commands ran from the portable `betterbet/` directory unless noted. No source-repository dependency installation or rebuild was used in place of this clean copy.
-
-| Command / check | Actual result |
-| --- | --- |
-| `node --version` | Node **v24.19.0** |
-| `pnpm --version` | **11.25.0** |
-| `npx --yes pnpm@11.25.0 install --frozen-lockfile` | **PASS**, exit 0. Fresh `node_modules`; 18 packages downloaded/added, esbuild postinstall completed. Lockfile resolution unchanged; supply-chain policy checks passed. |
-| `npx --yes pnpm@11.25.0 test` | **PASS**, exit 0. **54 tests, 54 passed, 0 failed/skipped/cancelled**. Reported test duration 711.477449 ms. |
-| `npx --yes pnpm@11.25.0 run build` | **PASS**, exit 0. Vite 6.1.0 transformed 1,591 modules; build reported **2m 57s**. Postbuild created **16 route entry points**. |
-| `npx --yes pnpm@11.25.0 audit --json` | **WARN**, exit 1 for known vulnerabilities: **13 advisories** (2 high, 9 moderate, 2 low, 0 critical). See below and `DEPENDENCY-AUDIT.json`. |
-| Python SHA-256 source/asset inspection | **PASS**. All application source and the existing lockfile preserved byte-for-byte. |
-| Python HTMLParser/resource inspection of `dist` | **PASS**. Every implemented route has HTML; HTML/font references resolve to bundled files. No former Sites origin remains in built HTML. |
-| Python temporary-directory postbuild exercise | **PASS**. A reserved test origin generated per-route canonical/OG metadata, a five-public-page sitemap and robots reference. Invalid origin with a path was rejected. Default null origin omits stale absolute metadata/sitemap. This is not a real domain/deployment test. |
-| Node React SSR internal-link inspection | **PASS**. 32 EN/VI route renders; all inspected internal link targets are implemented routes. This does not test click handlers. |
-| Python font/Pillow inspection | **PASS**. All eight TTF files parse and contain sampled Vietnamese accented glyphs; both font licenses are present. Original OG PNG decodes at **1200 × 630**. |
-| Runtime source/private-API inspection | **PASS within inspected scope**. No private Sites API, platform asset origin, environment-specific absolute import, fetch/XHR/WebSocket call, `eval`, or raw-HTML renderer in app/runtime source. No hosting manifest is needed by build. |
-| ZIP CRC/path/file/hash/secret-pattern inspection | **PASS** for the delivered ZIP; performed before saving the artifact. Manifest inventory excludes its own recursive hash. |
-
-`npm ci` was not run: this source uses pnpm and has no `package-lock.json`. `npm test` was not run; the command executed was the pnpm test invocation above. No lint script exists and lint was not requested.
-
-## Build output and warnings
-
-The built entry CSS is 87.29 kB (17.80 kB gzip). The lazy Three.js scene chunk is 489.66 kB (123.28 kB gzip); the main React chunk is 223.83 kB (73.66 kB gzip); Lab is 108.32 kB (34.80 kB gzip). These are emitted file sizes, not measured network performance or Core Web Vitals.
-
-Vite reported no unresolved imports, missing scripts/assets or chunk-size warnings. The npx wrapper printed an environment-specific npm warning about an unknown `http-proxy` setting and npm/pnpm upgrade notices. These did not fail install, test or build and are not required application settings. The pnpm version and dependency lockfile were retained.
-
-## Analytics and import/export tests actually passed
-
-The existing 16 domain tests cover:
-
-- Raw deterministic generator and canonical **12,000 / 10,080 / 3,720 / 2,160** counts, invite loss **6,360**, correct conversion values and chronological seven-day events.
-- Segment totals matching the full cohort; property filters changing derived counts/rates.
-- Duplicate identities, strict event order, missing milestones, valid repeated later events and outside-window exclusion.
-- Entry-date cohort selection, entry-time properties, incomplete observation exclusion and zero-cohort null rates.
-- BOM, quoting, escaped quotes, multiline/alternate-separator parsing and malformed CSV rejection.
-- Actual imported column/event mapping, timezone validation and duplicate-row handling.
-- Binary outcome assignment duplicates, full follow-up and conversion-window rejection.
-- Count-based two-arm metrics, Wilson/Newcombe uncertainty and approximate sample-size reference.
-- Spreadsheet formula-injection protection.
-- Actual edited-state serialization and quota-failure behavior using a localStorage mock.
-- Nonempty Markdown exporter output containing exact hypotheses/rationale, source IDs, alternatives and edited brief/learning text.
-
-These are executed function tests. Actual browser file selection, download, full mapped-import UI and chart repainting were **NOT RUN**. A full browser filter/reset interaction was **NOT RUN**; engine-filter/segment results passed.
-
-## Route and workflow render tests actually passed
-
-The 38 existing render tests use React server rendering: **16 routes × 2 languages = 32**, plus **6 saved-decision workflow renders**. Routes: `/`, `/product`, `/method`, `/case-study`, `/about`, `/lab`, `/lab/overview`, `/lab/diagnose`, `/lab/evidence`, `/lab/decide`, `/lab/experiment`, `/lab/deliver`, `/lab/review`, `/lab/decisions`, `/lab/data`, `/lab/settings`.
-
-They check that components render, retain the creator portfolio link and do not emit NaN/undefined. Saved workflow fixtures retain `BET-0001` across Overview, Decide, Experiment, Deliver, Review and Archive. They do not establish a browser end-to-end pass for saving, evidence link/unlink, editing/locking snapshots, replaying backups or assigning real outcomes.
-
-## Browser, device and deployment checks
-
-The required managed browser capability is unavailable. No preview server/browser was started, and no substitute browser automation or screenshot result is claimed.
-
-| Check | Status |
-| --- | --- |
-| Visual layouts at 375, 430, 768, 1024 and 1440 px | **NOT RUN / UNVERIFIED** |
-| Real CTA clicks, history navigation and direct route refresh in Vercel | **NOT RUN / UNVERIFIED**; route files/scoped rewrites inspected only |
-| Keyboard focus, dialog behavior, screen reader and full accessibility review | **NOT RUN / UNVERIFIED** |
-| EN/VI switching during edits/imports/filter changes | **NOT RUN / UNVERIFIED**; both language render sets passed |
-| Complete translation/content review | **UNVERIFIED**; preserved English-only error boundary is known |
-| WebGL on devices, context loss, fallback and reduced-motion behavior | **NOT RUN / UNVERIFIED**; source/fallback preserved |
-| Browser localStorage/IndexedDB reload, full backup/restore/reset | **NOT RUN / UNVERIFIED**; serialization mock test passed |
-| Full evidence → decision → experiment → brief → review browser journey | **NOT RUN / UNVERIFIED** |
-| Outcome/simulation separation under actual user interaction | **NOT RUN / UNVERIFIED**; source/validation retained |
-| Vercel build/deployment, assigned domain and Ready status | **NOT RUN**; no project was created |
-| GitHub repository existence/ownership/authentication | **NOT VERIFIED**; no GitHub account/repository was accessed |
-| Desired `betterbet.vercel.app` availability | **NOT VERIFIED** |
-
-## Dependency audit: unresolved findings
-
-The actual audit returned **2 high, 9 moderate, 2 low; 0 critical**. Findings are in preserved **Vite 6.1.0** and its **esbuild 0.24.2** dependency. Exact advisories, affected/patched ranges and links are in `DEPENDENCY-AUDIT.json`.
-
-| High advisory | Module | Patched range reported by audit |
+| Command/check | Result | Evidence and limit |
 | --- | --- | --- |
-| GHSA-p9ff-h696-f583 — arbitrary file read through dev-server WebSocket | Vite | `>=6.4.2` |
-| GHSA-fx2h-pf6j-xcff — Windows alternate-path file-deny bypass | Vite | `>=6.4.3` |
+| `pnpm install --offline --frozen-lockfile` | FAIL (environment cache) | Missing offline package metadata for `@esbuild/aix-ppc64`; this attempt could not complete. |
+| `pnpm install --frozen-lockfile` | PASS | Clean exported project installed with the frozen lockfile; 18 packages added; no source/package-version change. |
+| `pnpm test` | PASS | 206 tests, 206 passed, 0 failed, 0 skipped; one test run. |
+| `pnpm run build` | PASS | Vite transformed 1,598 modules; production build completed in 3m 2s; postbuild succeeded. One Vite build was run. |
+| `node scripts/verify-export.mjs` | PASS | Static public/Lab entry files, local built assets/fonts, relative module imports and explicit-origin postbuild metadata. |
+| Frozen-file byte comparison | PASS | 53 implementation/test/dependency-lock/asset/template files compared to the exact source commit. |
+| Original checkout status | PASS | Clean before and after export; original source not modified. |
+| `timeout 45 pnpm audit --json` | FAIL (reported advisories) | Audit completed within the bound and returned exit 1 because of the advisories listed below, not an install/build failure. |
+| Typecheck | NOT TESTED / not configured | JavaScript/JSX project; no TypeScript/typecheck script exists. |
+| Vercel deploy/build-container command | NOT TESTED | No Preview/production deployment or Vercel project mutation was authorized. Local pnpm install/build passed; Corepack/Vercel configuration follows documented settings. |
 
-The reviewed primary advisories concern exposed development servers; the planned Vercel configuration serves compiled static `dist`, not a Vite dev server. This is an architectural distinction, **not security clearance** for an untested deployment. Existing dev/preview scripts bind to `0.0.0.0`; do not expose these preserved vulnerable development tools to untrusted networks. Dependency remediation and regression testing should be an explicit subsequent upgrade. No dependency upgrade or lockfile replacement was silently included in this source export.
+Default build output is `dist/`. Representative outputs: CSS 88.48 kB, Lab chunk 128.25 kB, Three.js scene chunk 489.66 kB. These are build sizes, **not** performance measurements. No chunk-size warning appeared in the captured Vite output. Dependency policy checks passed during the normal frozen-lockfile install. The initial offline-cache failure was resolved by the ordinary install; it does not imply offline install will work on another machine.
 
-Primary advisory references:
+## Automated feature coverage — PASS at the stated level
 
-- https://github.com/advisories/GHSA-p9ff-h696-f583
-- https://github.com/advisories/GHSA-fx2h-pf6j-xcff
-- https://github.com/advisories/GHSA-67mh-4wv8-2f99
+- Eight raw full-case baselines, explicit entity units/case IDs, event chronology, conversion/observation bounds, cohort filters and segment reconciliation.
+- Pure workspace transitions preserve case/import edits without sharing the active analytical dataset.
+- Supplied case CSVs parsed through the actual validator/dataset builder/engine: all eight small files computed **20 → 14 → 9 → 5**. General supplied OrbitDesk example computed **3 → 2 → 1 → 1**.
+- Invalid schema, unit, ISO calendar date, JSON object and future-event errors are reported; zero-data and previous V1.0 CSV/statistical tests passed.
+- Supplied feedback text and synthetic classification; outcome control/treatment counts and wrong-experiment-ID rejection.
+- Counter controller starts/updates, cancels stale frames, reaches exact targets and handles instant values; EN/VI percentage decimals and no-data formatting.
+- Existing conversion statistics, sample planning, formula-safe CSV export, local-state serialization and user-edited decision Markdown tests.
+- React server rendering of primary routes in EN and VI, with and without saved decision fixtures; this does not execute browser event handlers.
+- V1.1 per-case server rendering for overview, Diagnose, Evidence, Decide, Experiment, Deliver, Review and Data in both languages, with saved-record fixtures.
+- Optional configured-origin canonical/OG/sitemap/robots metadata tested by the postbuild helper in a temporary fixture; the supplied application does not contain a guessed deployment origin.
 
-## Privacy checks and remaining limits
+## Routes checked
 
-The ZIP uses an explicit source-file inventory, with no user CSV, JSON workspace backup, `.env`, credential, cookie, repository metadata or browser storage. Known token/private-key patterns were checked in source/config/document text; this is not a comprehensive security audit. Imported text is rendered through React text nodes in inspected source; CSV formula protection is unit-tested. No server encryption, team access control or automatic origin-to-origin migration is claimed.
+Server-rendered EN/VI routes: `/`, `/product`, `/method`, `/case-study`, `/about`, `/lab`, `/lab/overview`, `/lab/diagnose`, `/lab/evidence`, `/lab/decide`, `/lab/experiment`, `/lab/deliver`, `/lab/review`, `/lab/decisions`, `/lab/data`, `/lab/settings`. The production route-entry files were also checked. Vercel's actual rewrite handling and real navigation/refresh are **NOT TESTED** here.
 
-The app remains local-only. Guardrails are definitions rather than measured outcomes; planning and simulation do not establish observed impact. The optional public SEO origin is unconfigured until an actual production hostname is assigned. No clean-install/build blocker remains; dependency warnings and real-browser/deployment checks remain open before a public production acceptance decision.
+## Browser-only verification — NOT TESTED
+
+Managed browser interaction tooling was unavailable. No preview server or alternative browser path was used. The following were not run and must not be inferred from the build or SSR tests:
+
+- Client application initialization/hydration, clicks/navigation/refresh and EN/VI preference persistence.
+- All eight case selections, editing/saving/reopening and repeated imported-dataset selection in a browser.
+- Actual File API picker/drop, success/errors, source preview and rendered import-to-analysis updates.
+- IntersectionObserver count-up appearance, rapid value changes, reduced-motion media events, tab visibility, live screen-reader behavior.
+- Actual localStorage/IndexedDB reload/quota/failure and complete backup/restore across origins.
+- Keyboard focus, screen readers, mobile/touch, layout breakpoints, WebGL/Three.js, GSAP/Lenis motion, visual regression, load/performance and browser/device compatibility.
+
+## Dependency/security audit — FAIL; versions intentionally frozen
+
+The current audit reported **13 advisories: 2 high, 9 moderate, 2 low, 0 critical**. They involve the frozen Vite **6.1.0** development/build dependency and its esbuild **0.24.2** dependency. This export is not a clean security bill or a dependency-upgrade release. The source-faithful dependency versions/lockfile remain unchanged; fixes are deferred for a separate reviewed update. Serve the static production output and avoid exposing the Vite development server publicly.
+
+| Package | Severity | Advisory | Reported issue | Audit patched range |
+| --- | --- | --- | --- | --- |
+| `esbuild` | moderate | [GHSA-67mh-4wv8-2f99](https://github.com/advisories/GHSA-67mh-4wv8-2f99) | esbuild enables any website to send any requests to the development server and read the response | `>=0.25.0` |
+| `vite` | moderate | [GHSA-x574-m823-4x7w](https://github.com/advisories/GHSA-x574-m823-4x7w) | Vite bypasses server.fs.deny when using ?raw?? | `>=6.1.2` |
+| `vite` | moderate | [GHSA-356w-63v5-8wf4](https://github.com/advisories/GHSA-356w-63v5-8wf4) | Vite has an `server.fs.deny` bypass with an invalid `request-target` | `>=6.1.5` |
+| `vite` | moderate | [GHSA-859w-5945-r5v3](https://github.com/advisories/GHSA-859w-5945-r5v3) | Vite's server.fs.deny bypassed with /. for files under project root | `>=6.1.6` |
+| `vite` | moderate | [GHSA-xcj6-pq6g-qj4x](https://github.com/advisories/GHSA-xcj6-pq6g-qj4x) | Vite allows server.fs.deny to be bypassed with .svg or relative paths | `>=6.1.4` |
+| `vite` | low | [GHSA-g4jq-h2w9-997c](https://github.com/advisories/GHSA-g4jq-h2w9-997c) | Vite middleware may serve files starting with the same name with the public directory | `>=6.3.6` |
+| `vite` | low | [GHSA-jqfw-vq24-v9c3](https://github.com/advisories/GHSA-jqfw-vq24-v9c3) | Vite's `server.fs` settings were not applied to HTML files | `>=6.3.6` |
+| `vite` | moderate | [GHSA-93m4-6634-74q7](https://github.com/advisories/GHSA-93m4-6634-74q7) | vite allows server.fs.deny bypass via backslash on Windows | `>=6.4.1` |
+| `vite` | moderate | [GHSA-4r4m-qw57-chr8](https://github.com/advisories/GHSA-4r4m-qw57-chr8) | Vite has a `server.fs.deny` bypassed for `inline` and `raw` with `?import` query | `>=6.1.3` |
+| `vite` | moderate | [GHSA-4w7w-66w2-5vf9](https://github.com/advisories/GHSA-4w7w-66w2-5vf9) | Vite Vulnerable to Path Traversal in Optimized Deps `.map` Handling | `>=6.4.2` |
+| `vite` | high | [GHSA-p9ff-h696-f583](https://github.com/advisories/GHSA-p9ff-h696-f583) | Vite Vulnerable to Arbitrary File Read via Vite Dev Server WebSocket | `>=6.4.2` |
+| `vite` | moderate | [GHSA-v6wh-96g9-6wx3](https://github.com/advisories/GHSA-v6wh-96g9-6wx3) | launch-editor: NTLMv2 hash disclosure via UNC path handling on Windows | `>=6.4.3` |
+| `vite` | high | [GHSA-fx2h-pf6j-xcff](https://github.com/advisories/GHSA-fx2h-pf6j-xcff) | vite: `server.fs.deny` bypass on Windows alternate paths | `>=6.4.3` |
+
+## Scope status
+
+Eight essentials cases, current KPI counters and simple template-first CSV implementation are included. Advanced Template Studio, new complex mapping/provenance visualizations and additional analytical views remain **INCOMPLETE / deferred**, as documented in `EXPORT-STATUS.md`. Preservation/implementation inventory is distinct from browser verification.

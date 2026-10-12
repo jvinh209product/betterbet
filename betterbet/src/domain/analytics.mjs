@@ -19,25 +19,26 @@ export function generateDemo(){
  return {id:'orbitdesk-demo-v1',name:'OrbitDesk',provenance:'synthetic_demo',events,fingerprint:'orbitdesk-2092026-v1',observation_end_at:'2026-09-30T23:59:59Z',parse_warnings:[]};
 }
 const cache=new WeakMap();
-function indexed(events){if(cache.has(events))return cache.get(events);const map=new Map();for(const e of events){if(!map.has(e.user_id))map.set(e.user_id,[]);map.get(e.user_id).push({...e,time:Date.parse(e.timestamp)});}for(const rows of map.values())rows.sort((a,b)=>a.time-b.time);cache.set(events,map);return map;}
-export function computeOrderedFunnel(events,filters=DEFAULT_FILTERS,observationEnd='2026-09-30T23:59:59Z',steps=EVENTS){
+function indexed(events){if(cache.has(events))return cache.get(events);const map=new Map();for(const e of events){const id=JSON.stringify([e.case_id||'',e.entity_type||'user',e.entity_id||e.user_id]);if(!map.has(id))map.set(id,[]);map.get(id).push({...e,time:Date.parse(e.timestamp)});}for(const rows of map.values())rows.sort((a,b)=>a.time-b.time);cache.set(events,map);return map;}
+export function computeOrderedFunnel(events,filters=DEFAULT_FILTERS,observationEnd='2026-09-30T23:59:59Z',steps=EVENTS,config={}){
  const counts=steps.map(()=>0),cohort=[];let incomplete=0;
  const from=filters.from?Date.parse(filters.from+'T00:00:00Z'):-Infinity,to=filters.to?Date.parse(filters.to+'T23:59:59.999Z'):Infinity;
  const window=Math.max(1,Number(filters.days)||7)*DAY,end=Date.parse(observationEnd);
  for(const [id,rows]of indexed(events)){
-  const entry=rows.find(e=>e.event_name===steps[0]&&e.time>=from&&e.time<=to);if(!entry)continue;
+  const entry=rows.find(e=>e.event_name===steps[0]&&e.time>=from&&e.time<=to&&e.time<=end);if(!entry)continue;
+  if(config.id&&entry.case_id&&entry.case_id!==config.id)continue;if(config.unit&&entry.entity_type&&entry.entity_type!==config.unit)continue;
   if(['device','acquisition_channel','plan_type','country'].some(k=>filters[k]&&filters[k]!=='all'&&entry[k]!==filters[k]))continue;
   const censored=entry.time+window>end;if(censored){incomplete++;if(filters.excludeIncomplete)continue;}
   let last=entry.time,progress=1;const times=[entry.time];counts[0]++;
-  for(let s=1;s<steps.length;s++){const next=rows.find(e=>e.event_name===steps[s]&&e.time>last&&e.time<=entry.time+window);if(!next)break;counts[s]++;last=next.time;times.push(last);progress++;}
-  cohort.push({user_id:id,entry,progress,times,censored});
+  for(let s=1;s<steps.length;s++){const minimum=/day30/.test(steps[s])?30*DAY:0;const maximum=steps[s]==='second_session_7d'?7*DAY:steps[s]==='paid_within_14d'?14*DAY:window;const next=rows.find(e=>e.event_name===steps[s]&&e.time>last&&e.time>=entry.time+minimum&&e.time<=Math.min(end,entry.time+window,entry.time+maximum));if(!next)break;counts[s]++;last=next.time;times.push(last);progress++;}
+  cohort.push({user_id:entry.entity_id||entry.user_id,entry,progress,times,censored});
  }
  return {counts,cohort,incomplete,steps:counts.map((users,i)=>({event_name:steps[i],users,cumulative_conversion:counts[0]?users/counts[0]:null,previous_step_conversion:i&&counts[i-1]?users/counts[i-1]:null,dropoff_users:i?counts[i-1]-users:null,dropoff_rate:i&&counts[i-1]?1-users/counts[i-1]:null}))};
 }
-export function compareSegments(events,filters,observationEnd,property){
- const all=computeOrderedFunnel(events,{...filters,[property]:'all'},observationEnd);const groups=new Map();
- for(const row of all.cohort){const key=row.entry[property]||'unknown';if(!groups.has(key))groups.set(key,[0,0,0,0]);const c=groups.get(key);for(let i=0;i<row.progress;i++)c[i]++;}
- return [...groups].map(([name,counts])=>({name,counts,activation:counts[0]?counts[3]/counts[0]:null}));
+export function compareSegments(events,filters,observationEnd,property,steps=EVENTS,config={}){
+ const all=computeOrderedFunnel(events,{...filters,[property]:'all'},observationEnd,steps,config);const groups=new Map();
+ for(const row of all.cohort){const key=row.entry[property]||'unknown';if(!groups.has(key))groups.set(key,steps.map(()=>0));const c=groups.get(key);for(let i=0;i<row.progress;i++)c[i]++;}
+ return [...groups].map(([name,counts])=>({name,counts,activation:counts[0]?counts[config.primaryIndex??3]/counts[0]:null}));
 }
 export function parseCsv(text){
  if(!text?.trim())throw new Error('empty');text=text.replace(/^\uFEFF/,'');
