@@ -1,6 +1,6 @@
 {
   "name": "betterbet-decision-lab",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -22,6 +22,6 @@
   },
   "packageManager": "pnpm@11.25.0",
   "engines": {
-    "node": "24.x"
+    "node": ">=24 <25"
   }
 }

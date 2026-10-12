@@ -1,0 +1,8 @@
+﻿entity_id,entity_type,event_name,timestamp,device,acquisition_channel,plan_type,country,session_id,properties_json
+u_demo_001,user,signup_completed,2026-09-01T08:00:00Z,desktop,organic,trial,US,s_001,"{""plan"":""starter""}"
+u_demo_001,user,workspace_created,2026-09-01T08:03:00Z,desktop,organic,trial,US,s_001,"{""plan"":""starter""}"
+u_demo_001,user,teammate_invited,2026-09-01T08:15:00Z,desktop,organic,trial,US,s_001,{}
+u_demo_001,user,first_value_reached,2026-09-01T08:19:00Z,desktop,organic,trial,US,s_001,{}
+u_demo_002,user,signup_completed,2026-09-01T08:10:00Z,mobile,paid,free,VN,s_002,{}
+u_demo_002,user,workspace_created,2026-09-01T08:30:00Z,mobile,paid,free,VN,s_002,{}
+u_demo_003,user,signup_completed,2026-09-02T09:10:00Z,desktop,referral,trial,GB,s_003,{}

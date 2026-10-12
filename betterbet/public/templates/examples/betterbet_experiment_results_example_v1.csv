@@ -1,0 +1,5 @@
+﻿experiment_id,arm,entity_id,assigned_at,converted,converted_at
+exp_sample_01,control,exp_u001,2026-09-04T09:00:00Z,true,2026-09-05T10:00:00Z
+exp_sample_01,control,exp_u002,2026-09-04T09:03:00Z,false,
+exp_sample_01,treatment,exp_u003,2026-09-04T09:06:00Z,true,2026-09-05T08:00:00Z
+exp_sample_01,treatment,exp_u004,2026-09-04T09:11:00Z,false,

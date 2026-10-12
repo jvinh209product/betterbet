@@ -1,129 +1,120 @@
-# BETTERBET. — The Product Decision Lab
+# betterbet. — The Product Decision Lab
 
-An independent, bilingual product decision workspace by Vinh Nguyen. Public pages explain the method; the browser-local Lab connects **Diagnose → Evidence → Decide → Experiment → Deliver → Review**.
+Stop shipping guesses. Start making better bets.
 
-This exports the existing BETTERBET source, not a redesign or a new Site. Provenance, exact adaptations and file hashes are in `EXPORT-MANIFEST.json`. No GitHub repository or Vercel project was created by this export.
+Complete portable source of the saved V1.1 essentials release: published Site version 2, commit `260cc23d4c78834081e1a3b8f9088f5b88170b12`. This export preserves the actual product; it does not finish deferred V1.1 features. See `EXPORT-STATUS.md` and `VALIDATION.md` for the scope and checks.
 
-## Requirements and commands
+## Local setup
 
-Use **Node.js 24.x** and **pnpm 11.25.0**. Validation used Node **24.19.0**. `.nvmrc` and `package.json` select Node 24; `packageManager` pins pnpm. pnpm 11 requires Node >=22.13, so the former README's Node 20 recommendation is not suitable.
+Use Node.js **24.x** and **pnpm 11.25.0**, pinned by `.nvmrc`, `engines` and `packageManager`. The original `pnpm-lock.yaml` is included. There is no npm lockfile; do not use `npm ci` for this archive.
 
-From the extracted `betterbet/` directory:
-
-```sh
-node --version
-npx --yes pnpm@11.25.0 install --frozen-lockfile
-npx --yes pnpm@11.25.0 run dev
-```
-
-Other commands:
+If pnpm is not installed, install the pinned tool with `npm install --global pnpm@11.25.0`, or enable Corepack and use the `packageManager` field. Then run these commands inside the extracted `betterbet/` directory:
 
 ```sh
-npx --yes pnpm@11.25.0 test
-npx --yes pnpm@11.25.0 run build
-npx --yes pnpm@11.25.0 run preview
+pnpm install --frozen-lockfile
+pnpm run dev
+pnpm test
+pnpm run build
+pnpm run preview
 ```
 
-Alternatively install pnpm 11.25.0 and use `pnpm install --frozen-lockfile`, `pnpm dev`, `pnpm test`, `pnpm build`, and `pnpm preview`. The exact existing `pnpm-lock.yaml` is included. There is no npm lockfile: **do not use `npm ci`** or substitute a new lockfile when reproducing this export. `pnpm-workspace.yaml` allows esbuild's required installation script. Production output is `dist/`, regenerated from source and omitted from the ZIP. No private Sites helper is required.
+The development command uses Vite; the production build creates `dist/`. No runtime API keys, backend, Sites runtime, Sites authentication, D1 or R2 are required. `.env.example` documents optional build metadata and the Vercel-only package-manager setting.
 
-## Actual stack
+## Actual stack and files
 
-| Component | Version / implementation |
+React / React DOM 19.1.1, Vite 6.1.0, Three.js 0.180.0, GSAP 3.12.7 with ScrollTrigger, Lenis 1.3.11, and Lucide React 0.468.0. This project uses procedural Three.js, not React Three Fiber. Inter and Space Grotesk are self-hosted with their SIL Open Font License files.
+
+| Location | Purpose |
 | --- | --- |
-| React / React DOM | 19.1.1 |
-| Vite | 6.1.0 |
-| Source | JavaScript, JSX, CSS; no TypeScript conversion |
-| Three.js | 0.180.0; procedural scene, no external model |
-| GSAP / ScrollTrigger | 3.12.7 |
-| Lenis | 1.3.11 |
-| Lucide React | 0.468.0 |
-| Fonts | Self-hosted Inter and Space Grotesk; SIL OFL licenses included |
-| Backend | None; browser-local processing and storage |
+| `src/main.jsx` | Initialization, routing, selected dataset, local persistence and exports |
+| `src/Marketing.jsx`, `src/Lab.jsx` | Existing public pages and six-stage workspace |
+| `src/domain/cases.mjs` | Eight configurations, deterministic data, scope isolation and case-specific drafts |
+| `src/domain/analytics.mjs` | Shared ordered-entity funnel, segmentation and conversion statistics |
+| `src/domain/counters.mjs`, `src/components/CountUp.jsx` | Real-target count-up animation and EN/VI formatters |
+| `src/domain/imports.mjs`, `src/DataManager.jsx` | Template schemas, parser/validation wiring and import UI |
+| `src/LegacyDataManager.jsx` | Retained V1.0 custom import for OrbitDesk |
+| `src/components/DecisionField.jsx`, `field-scene.mjs` | Original procedural scene and motion fallback |
+| `public/` | Fonts, license notices, favicon, OG image and supplied CSV assets |
+| `scripts/postbuild.mjs` | Route entry points and optional configured-domain SEO metadata |
+| `tests/` | Domain, import, counter and EN/VI server-rendered route checks |
+| `vercel.json` | Vite build settings and existing SPA rewrites |
 
-## Included features
+## Cases and data
 
-- Public pages `/`, `/product`, `/method`, `/case-study`, `/about`.
-- Lab entry/overview, six connected stages, Decision Archive, Data Manager and Settings.
-- Ordered unique-user funnels, cohort/segment/window filters, step inspection and saved investigations.
-- Searchable evidence, source links, counterevidence and editable notes.
-- Editable alternatives, hypotheses and rationale; snapshots, history and Decision DNA.
-- Linked experiment plans, separate drafts, metric definitions and an approximate sample-size helper.
-- Editable delivery briefs and genuine Markdown decision exports.
-- Measured outcome import and review; a separately labeled Scenario Sandbox.
-- Workspace backup/restore, reset confirmation and local persistence.
-- EN/VI resources, Vietnamese-capable fonts, localized number/date formatting and preserved original research text.
-- Lazy public motion/Three.js, native Lab scrolling, reduced-motion handling and SVG fallback.
+Each fictional case uses its own raw event dataset, counting unit, entry dates, ordered milestones, conversion window, hypothesis and suggested methodology. The same analytical engine and panels are reused. All full demo baselines are designed synthetic fixtures, not observed customer outcomes.
 
-These describe implemented source features. They do not assert that every interaction/device passed QA; see `VALIDATION.md`.
+| ID | Product | Industry | Unit | Window (days) | Full synthetic fixture counts |
+| --- | --- | --- | --- | ---: | --- |
+| `orbitdesk` | OrbitDesk | B2B SaaS | `user` | 7 | 12,000 → 10,080 → 3,720 → 2,160 |
+| `cartbloom` | CartBloom | E-commerce | `order` | 7 | 16,000 → 10,900 → 7,800 → 6,400 |
+| `pocketpath` | PocketPath | Personal finance | `user` | 45 | 10,000 → 6,400 → 4,600 → 2,900 |
+| `learnlane` | LearnLane | EdTech | `user` | 45 | 7,200 → 5,600 → 3,500 → 2,200 |
+| `fleetflow` | FleetFlow | Logistics operations | `shipment` | 7 | 8,000 → 6,800 → 5,500 → 4,900 |
+| `skillbridge` | SkillBridge | Talent marketplace | `user` | 7 | 9,000 → 6,200 → 2,800 → 1,450 |
+| `subnest` | SubNest | Subscription content | `user` | 45 | 15,000 → 11,300 → 8,200 → 4,100 |
+| `flowpay` | FlowPay | SME invoicing | `invoice` | 21 | 4,000 → 3,200 → 2,380 → 1,640 |
 
-## Project layout
+Select a case in the Lab entry cards or top-bar selector. Case/import workspaces retain their separate filters, evidence, draft reasoning and active decision. The archive intentionally lists saved records across workspaces; reopening a record restores its source context. Missing original raw imports are reported as unavailable rather than replaced by a demo.
 
-| Path | Purpose |
+The engine counts distinct entities, takes segment properties from the entry event, and requires later milestones in strict order within the chosen window and observation end. Day-30 milestones cannot be credited before Day 30, SubNest's second session must be within seven days, and FlowPay's payment milestone must be within 14 days. FleetFlow's primary KPI is first-attempt delivery, not its final proof-of-delivery milestone. Incomplete observation is flagged and can be excluded.
+
+Recommended methodologies are case guidance. Additional analytical views such as advanced retention/time-to-value panels are not part of this essentials release.
+
+## Template-first CSV import
+
+Open Lab → Data Manager, choose the data type and event-case schema, download a template, keep its headers, fill it with your actual rows, upload it, review validation, then select **Analyze Uploaded Data**. The standard path uses predefined schemas. Validation errors block import; correct the file and upload again. The preserved OrbitDesk V1.0 importer remains available for its old custom-mapping workflow.
+
+| Type | Required columns | Optional columns |
+| --- | --- | --- |
+| Events | `entity_id, entity_type, event_name, timestamp` | `device, acquisition_channel, plan_type, country, session_id, properties_json` |
+| Feedback | `feedback_id, source_type, source_date, feedback_text` | `entity_id, segment, stance, tags, synthetic` |
+| Outcomes | `experiment_id, arm, entity_id, assigned_at, converted` | `converted_at` |
+
+Templates: `public/templates/templates/betterbet_events_template_v1.csv`, `betterbet_feedback_template_v1.csv`, and `betterbet_experiment_results_template_v1.csv`. Three filled synthetic examples are under `public/templates/examples/`. Eight `{case_id}_small_example_events.csv` files are under `public/templates/case_examples/`; they contain 20 entities, not the full demo population. The exact supplied CSV bytes and accompanying README are preserved.
+
+CSV supports UTF-8/BOM, comma/semicolon/tab separators, quotes, escaped quotes and multiline fields. UI limit: 10 MB; parser limit: 100,000 rows. ISO timestamps need a timezone; feedback dates may also use `YYYY-MM-DD`. Entity types must match the selected case (`user`, `order`, `shipment` or `invoice`). Optional `properties_json` must be a JSON object. Empty optional dimensions become `unknown`.
+
+Confirm the complete observation end from your source; the last recorded event does not prove observation coverage. Imported entry-date filters are derived from the uploaded entries. Charts use parsed uploaded events, not full synthetic fixture totals. Provided unchanged example files are recognized and labeled synthetic. Edited files are ordinary uploads, not authenticated data sources. Original feedback text is preserved.
+
+Outcome imports require a saved decision and experiment plan. `experiment_id` must match the saved plan, `arm` is `control` or `treatment`, and `converted` is `true/false` or `1/0`. Repeated units and incomplete follow-up are rejected. The generic example uses `exp_sample_01`; replace that ID with your own saved plan ID to use it in the UI. Uploaded counts do not establish valid random assignment or causation. Scenario Sandbox is explicitly simulated. Guardrails remain unmeasured unless a future implementation adds their data.
+
+## Persistence, privacy and moving domains
+
+Small workspace state and language preference use localStorage; raw imports, the import registry and outcomes use IndexedDB. No imported CSV contents are sent to a server by this app. Export a workspace JSON backup and individual decision Markdown bundles before clearing data or changing browsers.
+
+Browser storage is scoped to an origin. Data on the old Site origin does **not** automatically appear on a Vercel domain or localhost. Download a backup from the old app, then restore that backup using Lab → Settings on the new origin. Browser reload/restore and cross-origin transfer require manual QA; source-level preservation is not a claim that those flows were exercised in this export session.
+
+This ZIP contains fictional bundled fixtures and application source, not anyone's browser workspace or private imported data. Local persistence is not a cloud synchronization or enterprise access-control system.
+
+## Vercel settings for the existing project
+
+Upload the **contents** of extracted `betterbet/` into the root of your existing repository `jvinh209product/betterbet`. Do not upload the outer archive folder as a second nested app. Use your own branch/Preview review process; this export did not push or deploy anything.
+
+| Setting | Value |
 | --- | --- |
-| `index.html` | Vite HTML entry, fonts, favicon and social metadata |
-| `src/main.jsx` | React entry, shared state, routes, storage and backup actions |
-| `src/Marketing.jsx` | Public pages and motion |
-| `src/Lab.jsx` | Six stages, overview, archive and settings |
-| `src/DataManager.jsx` | Actual CSV parsing, mapping, validation and import |
-| `src/components/` | UI, SVG fallback and procedural Three.js scene |
-| `src/domain/analytics.mjs` | Generator, analytics, CSV/outcome validation and statistics |
-| `src/domain/content.mjs` | Bilingual content, initial state and Markdown export |
-| `src/domain/storage.mjs` | localStorage, IndexedDB and downloads |
-| `src/styles.css` | Brand, responsive public/Lab and reduced-motion styles |
-| `public/` | OG artwork, favicon, fonts/stylesheet/licenses, robots |
-| `scripts/postbuild.mjs` | Route entry points and origin-aware SEO metadata |
-| `tests/` | Existing analytics and bilingual React server-render tests |
-| `site.config.json` | Optional public production origin; default `null` |
-| `vercel.json` | Vite build settings and scoped SPA rewrites |
+| Framework Preset | **Vite** |
+| Node.js | **24.x** |
+| Root Directory | Repository root, `.` / default, where `package.json` sits |
+| Install Command | `corepack pnpm install --frozen-lockfile` |
+| Build Command | `corepack pnpm run build` |
+| Output Directory | `dist` |
+| Package manager environment | `ENABLE_EXPERIMENTAL_COREPACK=1` in your Vercel project |
+| Optional SEO origin | `PUBLIC_SITE_URL` set to your actual configured HTTP(S) origin |
 
-## Synthetic data and analytics
+`vercel.json` supplies these commands/output and preserves rewrites for `/lab/:path*`, `/product`, `/method`, `/case-study` and `/about`. The postbuild script also writes route HTML entry points and a static-host `_redirects` file. Vercel deployment itself is **NOT TESTED** by this request.
 
-All bundled OrbitDesk events and research are **synthetic**. No real participant, business outcome or measured improvement is claimed. The deterministic generator produces raw chronological rows in memory; charts and calculations consume those rows.
+Vercel's standard pnpm detection may select a different version from the lockfile. Enable Corepack to honor the existing `pnpm@11.25.0` pin; the explicit Corepack commands avoid relying on an older preinstalled pnpm. See the official [package-manager documentation](https://vercel.com/docs/package-managers), [Corepack/build settings](https://vercel.com/docs/builds/configure-a-build), and [Node version settings](https://vercel.com/docs/functions/runtimes/node-js/node-js-versions).
 
-Default signup cohorts cover September 1–23, 2026 UTC, with a seven-day elapsed conversion window and observation through September 30. The computed ordered unique-user funnel is **12,000 → 10,080 → 3,720 → 2,160**. Invite loss is **6,360**, or **63.095238…% of 10,080** (approximately 63.10%). These are engine results, not substituted display constants.
+No domain is assumed or reserved. Without `PUBLIC_SITE_URL`, the export omits absolute canonical/OG URL and sitemap URLs, and uses the local `/og-image.png`. Set your actual origin as a build environment variable, or in `.env.local`, to emit matching SEO metadata on the next build. Do not commit `.env.local`.
 
-The engine selects the earliest qualified entry in the cohort range, captures properties at entry and accepts each required later event only after the preceding step and within the window. Duplicate entries do not add users; missing steps prevent credit for later milestones. Incomplete follow-up is flagged and can be excluded. Empty cohorts return null rates, not NaN/Infinity. When selected, imported rows replace the active analytical dataset.
+## Verification and troubleshooting
 
-## CSV contracts
+`VALIDATION.md` records the one verification pass and security audit. Automated domain/SSR checks do not verify actual browser clicks, file pickers, animation appearance, screen readers, responsive layouts, WebGL or performance. Complete the listed browser checks in your own Preview before production.
 
-Event CSV requires `user_id,event_name,timestamp`; optional fields are `device,acquisition_channel,plan_type,country,session_id`. Columns/events can be mapped to:
+If install fails because of an unsupported lockfile or `allowBuilds`, check `node --version` and `pnpm --version`; use the pinned versions. Offline installation needs cached platform/package metadata; a normal frozen-lockfile install was used for this export. Do not upgrade dependencies during an upload merely to resolve an old default pnpm.
 
-```text
-signup_completed → workspace_created → teammate_invited → first_value_reached
-```
+If refresh returns 404, check Root Directory, `dist` and the included `vercel.json` rewrites. If a case CSV reports a unit/entry error, select its matching case and keep the case's required event names. If imported data is unavailable, restore a backup or re-import the actual file.
 
-ISO timestamps need `Z` or an offset; missing offsets require an explicit UTC choice. UTF-8 BOM, comma/semicolon/tab separators, quoted commas, multiline fields and escaped quotes are supported. File limit: 10 MB; parser limit: 100,000 data rows. Review errors before choosing to exclude invalid rows. Confirm observation coverage from the actual source; a file's latest event does not prove complete coverage.
-
-Research CSV requires `body,source_reference`, optionally `source_type,source_date,stance,tags`. Research retains its original language.
-
-Outcome CSV requires `user_id,variant,exposure_timestamp,converted`, optionally `conversion_timestamp`. Variants are `control`/`treatment`; converted values are `true/false` or `1/0`. Units must be unique: all rows for duplicate units are excluded. Complete follow-up is required; supplied conversions must be within the declared window. Without conversion timestamps, binary within-window outcomes are taken as supplied with a visible caveat. Outcomes must represent the linked experiment's metric.
-
-Review separates counts, percentage-point differences and relative uplift. Its 95% difference interval uses Newcombe's independent two-proportion method with Wilson intervals. It does not validate random assignment or adjust for sequential monitoring, clustering, multiple comparisons or interference. Sample planning is an equal-split, two-sided normal approximation, not a measured result. Guardrail definitions are not measurements; Review displays “Not measured.” Without valid outcomes it remains “Awaiting measured outcomes.” Simulation stays separate from observed results.
-
-## Storage, privacy and migration
-
-Small records/preferences use localStorage key `betterbet.workspace.v1`; imported event/outcome data use IndexedDB database `betterbet-local`, store `datasets`. Demo rows are regenerated, not stored as a large localStorage object. The app uploads no source data. React renders imported text as text; CSV export neutralizes leading spreadsheet formula characters. Browser storage is not encrypted server storage or a team vault.
-
-**The source ZIP does not contain personal browser work. A new Vercel origin cannot read the old Sites origin's localStorage/IndexedDB.** Move actual work explicitly:
-
-1. In the existing workspace, open `/lab/settings`.
-2. Choose **Export Workspace / Xuất không gian**. Keep the downloaded JSON privately; it may contain imported data.
-3. Open the new site's assigned URL and `/lab/settings`.
-4. Export destination work first if needed. Choose **Restore Backup / Khôi phục sao lưu**, select a trusted backup and confirm replacement.
-5. Check datasets, decisions, evidence, plans and edited briefs before clearing the old browser's data.
-
-Backup schema: `betterbet-backup-v1`; restore file limit: 30 MB. Browser restore/reload was not exercised during export. Clearing storage, changing profiles or private browsing can remove/isolate records. Export regularly. No visitor backup, private CSV or authenticated session is bundled.
-
-## Deployment and public origin
-
-Read `DEPLOYMENT.md` before creating the independent repository/project yourself. **No environment variables, credentials, Sites APIs, D1, R2, server runtime or authentication integration are required.**
-
-`site.config.json` defaults to `{ "siteUrl": null }` because no new domain is assigned. Builds omit absolute canonical/OG URL and sitemap metadata until configured; existing OG artwork stays bundled. Once the actual production origin is known, set `siteUrl` to that plain HTTPS origin and rebuild. Postbuild generates route-specific metadata and a public-page sitemap. It does not assume `betterbet.vercel.app` is available. This is public configuration, not a secret/environment variable.
-
-## Verification and limits
-
-`VALIDATION.md` records executed checks, build, tests, audit findings and unverified items. Server rendering does not exercise clicks, browser storage, responsive layout, focus or WebGL. Review preserved dependency audit findings before public rollout.
-
-Local-only workspaces, one active imported event dataset; no cloud sync, team access control, connected analytics, automated experiments, billing, AI inference or verified participant research. User-authored research/drafts are not machine translated. A full translation audit and real-browser accessibility/device review remain unverified. The existing error-boundary fallback is English-only.
+Known dependency advisories are documented in `VALIDATION.md`; the frozen versions were not upgraded for this export. Serve the built static output rather than exposing the Vite development server publicly.
 
 Design and Develop by Vinh Nguyen — https://vinh-nguyen-portfolio-three.vercel.app/
